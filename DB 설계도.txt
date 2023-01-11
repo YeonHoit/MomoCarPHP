@@ -1,0 +1,356 @@
+1. User : 유저의 정보
+-> Index_ID: int
+-> ID: varchar
+-> Login: varchar
+-> Nickname: varchar
+-> UserCar: varchar
+-> Photo: varchar
+-> EMail: varchar
+-> Phone: varchar
+
+create table UserInfo(
+Index_ID int unsigned not null auto_increment primary key,
+ID varchar(50),
+Login varchar(20),
+Nickname varchar(20),
+UserCar varchar(50),
+Photo varchar(50),
+Email varchar(30),
+Phone varchar(20),
+NoticeAlert boolean,
+CommentAlert boolean,
+LikeAlert boolean,
+TagAlert boolean,
+ChattingAlert boolean,
+UserCarType varchar(50),
+Ban boolean
+)default charset=utf8 collate=utf8_general_ci;
+
+insert into Userinfo (ID, Login, Nickname, UserCar, Photo, Email, Phone) values (465, 'Kakao', '몸치팬더', 'Avante', 'C://', 'pdbx12@naver.com', '01040553815', true, true, true);
+
+2. CarInfo
+-> Index_num: int
+-> Manufacturer_eng: varchar(50)
+-> Manufacturer_ko: varchar(50)
+-> CarType_eng: varchar(50)
+-> CarType_ko: varchar(50)
+-> YearType_eng: varchar(50)
+-> YearType_ko: varchar(50)
+-> Exist: boolean
+
+create table CarInfo(
+Index_num int unsigned not null auto_increment primary key,
+Manufacturer_eng varchar(50),
+Manufacturer_ko varchar(50),
+CarType_eng varchar(50),
+CarType_ko varchar(50),
+YearType_eng varchar(50),
+YearType_ko varchar(50),
+Exist boolean default false
+)default charset=utf8 collate=utf8_general_ci;
+
+insert into CarInfo (Manufacturer_eng, Manufacturer_ko, CarType_eng, CarType_ko, YearType_eng, YearType_ko) values ('volvo', '볼보', 'xc90', 'XC90', 'xc90', 'XC90');
+
+3. SelectedParts
+
+create table SelectedParts(
+   Index_num int unsigned not null auto_increment primary key,
+   CarName varchar(40) not null,
+   FrontBumper varchar(40),
+   RearBumper varchar(40),
+   Grill varchar(40),
+   Bonnet varchar(40),
+   FrontFender varchar(40),
+   RearFender varchar(40),
+   Wheel varchar(40),
+   Tire varchar(40),
+   Brake varchar(40),
+   Spoiler varchar(40),
+   ExhaustPipe varchar(40)
+)default charset=utf8 collate=utf8_general_ci;
+
+
+4. Community
+-> Index_num: int
+-> BoardName: varchar
+-> NickName: varchar
+-> Title: varchar
+-> Contents: text
+-> WriteDate: datetime(커뮤니티 하루 단위 -> ex. 방금전, 1분전, 1시간전, 그다음부터는 날짜로)
+-> Views: int
+-> Photo: varchar
+-> Photo_Count: int
+-> ViewLike: int
+-> Price: varchar
+
+create table Community(
+Index_num int unsigned not null auto_increment primary key,
+BoardName varchar(20),
+NickName varchar(20),
+Title varchar(50),
+Contents text,
+WriteDate datetime,
+Views int,
+Photo varchar(200),
+Photo_Count int,
+ViewLike int,
+Price varchar(20)
+)default charset=utf8 collate=utf8_general_ci;
+
+insert into Community(BoardName, NickName, Title, Contents, WriteDate, Views, Photo, Photo_Count, ViewLike) values ('아반떼 CN7', '구글', 'Test2’, 'Test2’, now(), 0, '', null, null);
+
+5. TuningShop
+-> Index_num: int
+-> Name: varchar
+-> Address: varchar
+-> Photo: varchar
+-> PhoneNumber: varchar
+
+create table TuningShop(
+Index_num int unsigned not null auto_increment primary key,
+Name varchar(50),
+Address varchar(100),
+Photo varchar(50),
+PhoneNumber varchar(20),
+lat varchar(20),
+`long` varchar(20)
+)default charset=utf8 collate=utf8_general_ci;
+
+insert into TuningShop (Name, Address, Photo, PhoneNumber) values ( 'WP tune', '경상남도 김해시 칠산로237번길 12-10', 'wp_tune.JPG', '0507-1341-1228');
+
+6. CommunityComment
+-> Index_num: int
+-> CommunityNumber: int
+-> Content: varchar
+-> ContentDateTime: datetime(커뮤니티 하루 단위 -> ex. 방금전, 1분전, 1시간전, 그다음부터는 날짜로)
+-> NickName: varchar
+
+create table CommunityComments(
+Index_num int unsigned not null auto_increment primary key,
+CommunityNumber int,
+Comments text,
+CommentsDateTime datetime,
+NickName varchar(20)
+)default charset=utf8 collate=utf8_general_ci;
+
+insert into CommunityComments(CommunityNumber, Comments, CommentsDateTime, NickName) values (2, "DB 테스트에용~~", now(), "관리자");
+
+7. Infomation
+-> Photo: varchar
+
+8. Market
+-> Index_num: int
+-> Nickname: varchar
+-> Title: varchar
+-> Contents: text
+-> Write_Date: datetime(커뮤니티 하루 단위 -> ex. 방금전, 1분전, 1시간전, 그다음부터는 날짜로)
+-> Price: int
+-> Views: int
+-> Photo: varchar
+-> Photo_Count: int
+-> Like: int
+-> 위치? 일단 생각좀(할수 있는지 없는지 모르겠음)
+
+9. Alert
+-> Index_num: int
+-> Title: varchar
+-> Contents: text
+-> AlertDate: datetime
+-> AlertType: varchar(공지사항, 커뮤니티 등등)
+-> FromUser: varchar
+-> ToUser: varchar
+-> Target_num: int
+
+create table Alert(
+Index_num int unsigned not null auto_increment primary key,
+Title varchar(50),
+Contents text,
+AlertDate datetime,
+AlertType varchar(20),
+FromUser varchar(20),
+ToUser varchar(20),
+Target_num int
+)default charset=utf8 collate=utf8_general_ci;
+
+insert into Alert(Title, Contents, AlertDate, AlertType, FromUser, ToUser, Target_num) values
+
+10. DeviceInfo
+-> Index_num: int
+-> Token: varchar
+-> ID: varchar(50)
+
+create table DeviceInfo(
+Index_num int unsigned not null auto_increment primary key,
+Token varchar(200),
+ID varchar(50)
+)default charset=utf8 collate=utf8_general_ci;
+
+11. LikeInfo
+-> Index_num: int
+-> ID: varchar
+-> CommunityNumber: int
+
+create table LikeInfo(
+Index_num int unsigned not null auto_increment primary key,
+ID varchar(50),
+CommunityNumber int
+)default charset=utf8 collate=utf8_general_ci;
+
+12. AdviceInfo
+-> Index_num: int
+-> Photo: varchar
+-> AlertDate: datetime
+
+create table AdviceInfo(
+Index_num int unsigned not null auto_increment primary key,
+Photo varchar(100),
+AlertDate datetime
+)default charset=utf8 collate=utf8_general_ci;
+
+insert into AdviceInfo(Photo, AlertDate) values ('advice/test4.jpg', now());
+
+
+14. MountableParts
+
+create table MountableParts(
+   Index_num int unsigned not null auto_increment primary key,
+   CarName varchar(20) not null,
+   FrontBumper text,
+   RearBumper text,
+   Grill text,
+   Bonnet text,
+   FrontFender text,
+   RearFender text,
+   WheelInch text,
+   WheelWidthLimit varchar(10),
+   Brake text,
+   Spoiler text,
+   ExhaustPipe text
+)default charset=utf8 collate=utf8_general_ci;
+
+15. Chatting
+
+create table Chatting(
+Index_num int unsigned not null auto_increment primary key,
+SendUserID varchar(50),
+SendUserNickName varchar(20),
+ReceiveUserID varchar(50),
+ReceiveUserNickName varchar(20),
+SendDate datetime,
+ReadCheck boolean,
+Message text,
+Photo varchar(50)
+)default charset=utf8 collate=utf8_general_ci;
+
+16. FieldInfo
+
+create table FieldInfo(
+Name varchar(30) not null primary key
+)default charset=utf8 collate=utf8_general_ci;
+
+17. WheelInfo
+
+create table WheelInfo(
+Name varchar(80) not null
+)default charset=utf8 collate=utf8_general_ci;
+
+18. TireInfo
+
+create table TireInfo(
+Name varchar(80) not null
+)default charset=utf8 collate=utf8_general_ci;
+
+19. YoutubeInfo
+
+create table YoutubeInfo(
+Index_num int unsigned not null auto_increment primary key,
+Title varchar(100),
+Channel varchar(100),
+url varchar(100),
+Photo varchar(100)
+)default charset=utf8 collate=utf8_general_ci;
+
+20. WithDrawCount
+
+create table WithDrawCount(
+count int
+)default charset=utf8 collate=utf8_general_ci;
+
+21. PaintPartSurfaceInfo
+
+Create Table PaintPartSurfaceInfo(
+CarName varchar(40) not null,
+Entire text,
+Bonnet text,
+SideMirror text,
+Roof text,
+ChromeDelete text,
+Wheel text,
+BrakeCaliper text,
+Window text
+)default charset=utf8 collate=utf8_general_ci;
+
+22. Review
+
+create table Review(
+Index_num int unsigned not null auto_increment primary key,
+Target varchar(50),
+WriterID varchar(50),
+WriteDate datetime,
+Star int,
+Contents text,
+Photo text
+)default charset=utf8 collate=utf8_general_ci;
+
+23. Report
+
+create table Report(
+Index_num int unsigned not null auto_increment primary key,
+Target varchar(20),
+TargetID int
+)default charset=utf8 collate=utf8_general_ci;
+
+24. Block
+create table Block(
+Index_num int unsigned not null auto_increment primary key,
+UserID varchar(50),
+Target varchar(50)
+)default charset=utf8 collate=utf8_general_ci;
+
+25. Attraction
+create table Attraction(
+Index_num int unsigned not null auto_increment primary key,
+Name text,
+Kind varchar(20),
+Photo text,
+Subtitle text,
+Lat varchar(20),
+`Long` varchar(20),
+Address text,
+PhoneNumber varchar(20),
+OpenHours text,
+Menu text,
+Support text
+)default charset=utf8 collate=utf8_general_ci;
+
+26. AttractionReview
+create table AttractionReview(
+Index_num int unsigned not null auto_increment primary key,
+Target int,
+WriterID varchar(50),
+WriteDate datetime,
+Star int,
+Contents text,
+Photo text
+)default charset=utf8 collate=utf8_general_ci;
+
+27. GuestCount
+
+create table GuestCount(
+count int
+)default charset=utf8 collate=utf8_general_ci;
+
+----------------------------------------------------------------
+로컬 저장소에 저장되는 데이터(JSON)
+1. Car_Parts
+2. Simulation_Setting
